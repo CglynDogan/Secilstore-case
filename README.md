@@ -107,12 +107,3 @@ npm start
 - ✅ Redux state management
 - ✅ TypeScript support
 
-## 🔐 Authentication
-
-Default login credentials for development:
-- Email: `admin@example.com`
-- Password: `password123`
-
-## 📄 License
-
-This project is private and confidential.
