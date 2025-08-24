@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  secil-store-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=your-secret-key-here
+      - NEXT_PUBLIC_API_URL=https://maestro-api-dev.secil.biz
+      - NEXT_PUBLIC_API_SECRET=YOUR_SECRET_TOKEN
+    volumes:
+      # For development hot reload (comment out for production)
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    restart: unless-stopped
+    networks:
+      - secil-network
+
+  # Optional: Add nginx for production
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - secil-store-frontend
+    networks:
+      - secil-network
+    profiles:
+      - production
+
+networks:
+  secil-network:
+    driver: bridge
+
+volumes:
+  node_modules:

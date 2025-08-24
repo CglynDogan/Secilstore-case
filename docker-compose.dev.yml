@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  secil-store-frontend-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=your-secret-key-here
+      - NEXT_PUBLIC_API_URL=https://maestro-api-dev.secil.biz
+      - NEXT_PUBLIC_API_SECRET=YOUR_SECRET_TOKEN
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    restart: unless-stopped
+    networks:
+      - secil-network
+
+networks:
+  secil-network:
+    driver: bridge
