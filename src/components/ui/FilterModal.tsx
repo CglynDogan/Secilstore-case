@@ -54,20 +54,16 @@ export function FilterModal({
   };
 
   const handleClear = () => {
-    // State'leri temizle
-    setSelectedFilters([])
-    setSelectedWarehouse("")
-    setMinStock("")
-    setMaxStock("")
-    setProductCode("")
-    setAllSizesStock(false)
-    setSortOption("")
-    
-    // Boş filtre listesi ile API'yi güncelle
-    console.log('Filtreler temizlendi') // Debug için
-    onApplyFilters([])
-    onClose()
-  }
+    setSelectedFilters([]);
+    setSelectedWarehouse("");
+    setMinStock("");
+    setMaxStock("");
+    setProductCode("");
+    setAllSizesStock(false);
+    setSortOption("");
+    onApplyFilters([]);
+    onClose();
+  };
 
   if (!isOpen) return null;
 
